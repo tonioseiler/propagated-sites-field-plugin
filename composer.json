@@ -1,0 +1,40 @@
+{
+	"name": "furbo/propagated-sites-field",
+	"description": "Craft 3 Field type that allows the selection of Craft sites and propagates the entries to the selected sites. Based on this Plugin: eastslopestudio/craft3-sites-field",
+	"type": "craft-plugin",
+	"version": "0.9.0",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Furbo GmbH",
+			"email": "tonio@furbo.ch",
+			"homepage": "https://furbo.ch"
+		}
+	],
+	"keywords": [
+		"craft",
+		"cms",
+		"craftcms",
+		"sites",
+		"field"
+	],
+	"support": {
+		"email": "suppport@furbo.ch"
+	},
+	"require": {
+		"craftcms/cms": "^3.0.0-RC1"
+	},
+	"autoload": {
+		"psr-4": {
+			"furbo\\sitesfield\\": "src/"
+		}
+	},
+	"extra": {
+		"name": "Sites Field",
+		"handle": "sites-field",
+		"schemaVersion": "0.0.1",
+		"hasCpSettings": false,
+		"hasCpSection": false,
+		"class": "furbo\\sitesfield\\Sites"
+	}
+}
