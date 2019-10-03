@@ -22,3 +22,30 @@ To display only events related to the current site you could use the following l
 ```
 
 > Note: `siteIds` returns an array of site ID's which you can use the twig [in](https://twig.symfony.com/doc/2.x/templates.html#containment-operator) operator.
+
+
+##Installation
+1. Clone repo from here:
+https://bitbucket.org/seilersteinbachgmbh/propagated-sites-field-plugin/src/master/
+
+2. add repo to composer json of your craft installation like this:
+```
+"repositories": [
+    ...
+    {
+        "type": "path",
+        "url": "/path-to-repo/propagated-sites-field"
+    }
+]
+```
+
+3. Install plugin via composer
+```
+composer require furbo/propagated-sites-field
+```
+
+4. Plugin über Backend aktivieren
+
+5. Create field from Type Sites (in the current release fieldhandle must be "sites")
+
+6. Add Field to entries and save
