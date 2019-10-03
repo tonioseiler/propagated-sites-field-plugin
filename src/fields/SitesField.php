@@ -19,11 +19,6 @@ use yii\db\Schema;
 class SitesField extends Field implements PreviewableFieldInterface
 {
 
-	/**
-	 * @var bool Whether or not the field allows multiple selections.
-	 */
-	public $allowMultiple = false;
-
     /**
 	 * @var bool Wether or not the entry should be propageted to the sites selected in the sites field.
 	 */
@@ -33,6 +28,12 @@ class SitesField extends Field implements PreviewableFieldInterface
 	 * @var array What sites have been whitelisted as selectable for this field.
 	 */
 	public $whitelistedSites = [];
+
+    /**
+     * @var bool Whether or not the field allows multiple selections.
+     * -> not used anymore but breaks backwards compatibility if removed
+     */
+    public $allowMultiple = true;
 
 	/**
 	 * @inheritdoc
@@ -115,9 +116,7 @@ class SitesField extends Field implements PreviewableFieldInterface
 		$sites = $this->getSites(); // Get all sites available to the current user.
 		$whitelist = array_flip($this->whitelistedSites); // Get all whitelisted sites.
 		$whitelist[''] = true; // Add a blank entry in, in case the field's options allow a 'None' selection.
-		if (!$this->allowMultiple && !$this->required) { // Add a 'None' option specifically for optional, single value fields.
-			$sites = ['' => Craft::t('app', 'None')] + $sites;
-		}
+
 		$whitelist = array_intersect_key($sites, $whitelist); // Discard any sites not available within the whitelist.
 
         if(empty($element->id)) $value = [$element->siteId];

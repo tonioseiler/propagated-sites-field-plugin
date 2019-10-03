@@ -1,45 +1,30 @@
 {% import '_includes/forms' as forms %}
 
+{% set options = [] %}
 
+{% for id,name in sites %}
+    {% if currentSiteId and id == currentSiteId %}
+        {% set options = options|merge([{label: name, value: id, disabled: true }]) %}
+    {% else %}
+        {% set options = options|merge([{label: name, value: id}]) %}
+    {% endif%}
+{% endfor %}
 
-{% if field.allowMultiple %}
-    {% set options = [] %}
+{{ forms.checkboxGroup({
+	id : field.handle,
+	name : field.handle,
+	values: value,
+	placeholder: 'Choose Sites...' | t('sites-field'),
+	options: options
+}) }}
 
-    {% for id,name in sites %}
-        {% if currentSiteId and id == currentSiteId %}
-            {% set options = options|merge([{label: name, value: id, disabled: true }]) %}
-        {% else %}
-            {% set options = options|merge([{label: name, value: id}]) %}
-        {% endif%}
-    {% endfor %}
-
-	{{ forms.checkboxGroup({
-		id : field.handle,
-		name : field.handle,
-		values: value,
-		placeholder: 'Choose Sites...' | t('sites-field'),
-		options: options
-	}) }}
-
-    {# add hidden fields for disabled options #}
-    {% for id,name in sites %}
-        {% if currentSiteId and id == currentSiteId %}
-            {{ forms.hidden({
-                id : field.handle,
-                name : (field.handle ~ "[]"),
-                value: id})
-            }}
-        {% endif%}
-    {% endfor %}
-{% else %}
-	{{ forms.select({
-		id : field.handle,
-		name : field.handle,
-		value: value,
-		placeholder: 'Choose a Site...' | t('sites-field'),
-		options: sites
-	}) }}
-	{% if value is iterable %}
-		<p class="warning">{{ "Multiple sites selected, but field only allows one site. Selecting a new value will clear the existing multiple sites selection." | t('sites-field') }}</p>
-	{% endif %}
-{% endif %}
+{# add hidden fields for disabled options #}
+{% for id,name in sites %}
+    {% if currentSiteId and id == currentSiteId %}
+        {{ forms.hidden({
+            id : field.handle,
+            name : (field.handle ~ "[]"),
+            value: id})
+        }}
+    {% endif%}
+{% endfor %}

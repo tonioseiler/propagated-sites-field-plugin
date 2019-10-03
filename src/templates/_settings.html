@@ -10,14 +10,6 @@
 }) }}
 
 {{ forms.checkboxField({
-	label : 'Allow Multiple' | t('sites-field'),
-	instructions : 'If checked, the user can select multiple sites, otherwise they can only select one.' | t('sites-field'),
-	id : 'allowMultiple',
-	name : 'allowMultiple',
-	checked: field.allowMultiple
-}) }}
-
-{{ forms.checkboxField({
 	label : 'Propagate to selected sites' | t('sites-field'),
 	instructions : 'If the section is configured to propagate entries to all sites, the entries are only propagated to the selected sites. If the section is configured not to propagate, then this field does not have an effect.' | t('sites-field'),
 	id : 'propagate',
