@@ -24,7 +24,7 @@ To display only events related to the current site you could use the following l
 > Note: `siteIds` returns an array of site ID's which you can use the twig [in](https://twig.symfony.com/doc/2.x/templates.html#containment-operator) operator.
 
 
-##Installation
+## Installation
 1. Clone repo from here:
 https://bitbucket.org/seilersteinbachgmbh/propagated-sites-field-plugin/src/master/
 
