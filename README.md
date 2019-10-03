@@ -25,10 +25,9 @@ To display only events related to the current site you could use the following l
 
 
 ## Installation
-1. Clone repo from here:
+- Clone repo from here:
 https://bitbucket.org/seilersteinbachgmbh/propagated-sites-field-plugin/src/master/
-
-2. add repo to composer json of your craft installation like this:
+- add repo to composer json of your craft installation like this:
 ```
 "repositories": [
     ...
@@ -38,14 +37,10 @@ https://bitbucket.org/seilersteinbachgmbh/propagated-sites-field-plugin/src/mast
     }
 ]
 ```
-
-3. Install plugin via composer
+- Install plugin via composer
 ```
 composer require furbo/propagated-sites-field
 ```
-
-4. Plugin über Backend aktivieren
-
-5. Create field from Type Sites (in the current release fieldhandle must be "sites")
-
-6. Add Field to entries and save
+- Plugin über Backend aktivieren
+- Create field from Type Sites (in the current release fieldhandle must be "sites")
+- Add Field to entries and save
