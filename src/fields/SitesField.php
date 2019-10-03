@@ -24,6 +24,11 @@ class SitesField extends Field implements PreviewableFieldInterface
 	 */
 	public $allowMultiple = false;
 
+    /**
+	 * @var bool Wether or not the entry should be propageted to the sites selected in the sites field.
+	 */
+	public $propagate = true;
+
 	/**
 	 * @var array What sites have been whitelisted as selectable for this field.
 	 */
