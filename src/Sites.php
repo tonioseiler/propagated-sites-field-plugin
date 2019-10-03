@@ -55,22 +55,42 @@ class Sites extends Plugin
     public function afterElementSave(Event $event) {
         if ($event->sender instanceof Entry) {
             $entry = $event->sender;
-            $siteIds = $entry->getFieldValue('sites');
-            /*dd(array_search($entry->siteId, $siteIds));*/
-            foreach (Craft::$app->sites->allSiteIds as $siteId) {
-                if(array_search($siteId, $siteIds) === false) {
-                    try {
-                        //hier den eintrag aus `content` (`elementId`, `siteId`) löschen und aus elements sites
-                        Craft::$app->db->createCommand()->delete('content', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
-                        Craft::$app->db->createCommand()->delete('elements_sites', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
-                    } catch (ElementNotFoundException $e) {
-                        Craft::error('Error while propagting entry to sites.');
-                        throw new Exception('Error while propagting entry to sites.');
-                    }
 
+            $field = $this->getSiteField($entry);
+
+            if ($field != null) {
+                $siteIds = $entry->getFieldValue($field->handle);
+                foreach (Craft::$app->sites->allSiteIds as $siteId) {
+                    if(array_search($siteId, $siteIds) === false) {
+                        try {
+                            //hier den eintrag aus `content` (`elementId`, `siteId`) löschen und aus elements sites
+                            Craft::$app->db->createCommand()->delete('content', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
+                            Craft::$app->db->createCommand()->delete('elements_sites', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
+                        } catch (ElementNotFoundException $e) {
+                            Craft::error('Error while propagting entry to sites.');
+                            throw new Exception('Error while propagting entry to sites.');
+                        }
+
+                    }
                 }
             }
         }
+    }
+
+    protected function getSiteField(Entry $entry) {
+        //find sites field
+        $fieldValues = $entry->getFieldValues();
+        $siteFields = Craft::$app->fields->allFields;
+        $siteFieldHandle = 'sites';
+
+        foreach ($fieldValues as $handle => $value) {
+            foreach ($siteFields as $field) {
+                if(get_class($field) == 'furbo\sitesfield\fields\SitesField') {
+                    return $field;
+                }
+            }
+        }
+        return null;
     }
 
 }
