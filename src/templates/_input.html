@@ -1,13 +1,36 @@
 {% import '_includes/forms' as forms %}
 
+
+
 {% if field.allowMultiple %}
+    {% set options = [] %}
+
+    {% for id,name in sites %}
+        {% if currentSiteId and id == currentSiteId %}
+            {% set options = options|merge([{label: name, value: id, disabled: true }]) %}
+        {% else %}
+            {% set options = options|merge([{label: name, value: id}]) %}
+        {% endif%}
+    {% endfor %}
+
 	{{ forms.checkboxGroup({
 		id : field.handle,
 		name : field.handle,
 		values: value,
 		placeholder: 'Choose Sites...' | t('sites-field'),
-		options: sites
+		options: options
 	}) }}
+
+    {# add hidden fields for disabled options #}
+    {% for id,name in sites %}
+        {% if currentSiteId and id == currentSiteId %}
+            {{ forms.hidden({
+                id : field.handle,
+                name : (field.handle ~ "[]"),
+                value: id})
+            }}
+        {% endif%}
+    {% endfor %}
 {% else %}
 	{{ forms.select({
 		id : field.handle,

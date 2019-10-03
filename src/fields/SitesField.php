@@ -111,6 +111,7 @@ class SitesField extends Field implements PreviewableFieldInterface
 	 */
 	public function getInputHtml($value, ElementInterface $element = null): string
 	{
+
 		$sites = $this->getSites(); // Get all sites available to the current user.
 		$whitelist = array_flip($this->whitelistedSites); // Get all whitelisted sites.
 		$whitelist[''] = true; // Add a blank entry in, in case the field's options allow a 'None' selection.
@@ -119,11 +120,14 @@ class SitesField extends Field implements PreviewableFieldInterface
 		}
 		$whitelist = array_intersect_key($sites, $whitelist); // Discard any sites not available within the whitelist.
 
+        if(empty($element->id)) $value = [$element->siteId];
+
 		return Craft::$app->getView()->renderTemplate(
 			'sites-field/_input', [
 				'field' => $this,
 				'value' => $value,
 				'sites' => $whitelist,
+                'currentSiteId' => $element->siteId
 			]
 		);
 	}

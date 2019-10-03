@@ -70,7 +70,6 @@ class Sites extends Plugin
                             Craft::error('Error while propagting entry to sites.');
                             throw new Exception('Error while propagting entry to sites.');
                         }
-
                     }
                 }
             }
