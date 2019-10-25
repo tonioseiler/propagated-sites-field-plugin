@@ -30,8 +30,8 @@
 		}
 	},
 	"extra": {
-		"name": "Sites Field",
-		"handle": "sites-field",
+		"name": "Propagated Sites Field",
+		"handle": "propagated-sites-field",
 		"schemaVersion": "0.0.1",
 		"hasCpSettings": false,
 		"hasCpSection": false,
