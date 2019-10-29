@@ -69,7 +69,7 @@ class SitesField extends Field implements PreviewableFieldInterface
 	public function getSettingsHtml(): string
 	{
 		return Craft::$app->getView()->renderTemplate(
-			'sites-field/_settings',
+			'propagated-sites-field/_settings',
 			[
 				'field' => $this,
 				'sites' => $this->getSites()
@@ -122,7 +122,7 @@ class SitesField extends Field implements PreviewableFieldInterface
         if(empty($element->id)) $value = [$element->siteId];
 
 		return Craft::$app->getView()->renderTemplate(
-			'sites-field/_input', [
+			'propagated-sites-field/_input', [
 				'field' => $this,
 				'value' => $value,
 				'sites' => $whitelist,
