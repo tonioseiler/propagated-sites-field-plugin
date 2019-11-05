@@ -59,7 +59,11 @@ class Sites extends Plugin
             $field = $this->getSiteField($entry);
 
             if ($field != null && $field->propagate) {
-                $siteIds = $entry->getFieldValue($field->handle);
+                try {
+                    $siteIds = $entry->getFieldValue($field->handle);
+                } cacth (\Exception $e) {
+                    //nothing
+                }
                 foreach (Craft::$app->sites->allSiteIds as $siteId) {
                     if(array_search($siteId, $siteIds) === false) {
                         try {
