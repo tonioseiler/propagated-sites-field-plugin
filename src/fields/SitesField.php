@@ -41,7 +41,7 @@ class SitesField extends Field implements PreviewableFieldInterface
 	 */
 	public static function displayName(): string
 	{
-		return \Craft::t('sites-field', 'Sites');
+		return \Craft::t('propagated-sites-field', 'Sites');
 	}
 
 	/**
@@ -101,7 +101,7 @@ class SitesField extends Field implements PreviewableFieldInterface
 
 		foreach ($this->whitelistedSites as $site) {
 			if (!isset($sites[$site])) {
-				$this->addError($attribute, Craft::t('sites-field', 'Invalid site selected.'));
+				$this->addError($attribute, Craft::t('propagated-sites-field', 'Invalid site selected.'));
 			}
 		}
 	}
@@ -155,12 +155,12 @@ class SitesField extends Field implements PreviewableFieldInterface
         if (is_array($value)) {
             foreach ($value as $id) {
                 if (!isset($sites[$id])) {
-                    $element->addError($this->handle, Craft::t('sites-field', 'Invalid site selected.'));
+                    $element->addError($this->handle, Craft::t('propagated-sites-field', 'Invalid site selected.'));
                 }
             }
         } else {
             if (!isset($sites[$value])) {
-                $element->addError($this->handle, Craft::t('sites-field', 'Invalid site selected.'));
+                $element->addError($this->handle, Craft::t('propagated-sites-field', 'Invalid site selected.'));
             }
         }
 
