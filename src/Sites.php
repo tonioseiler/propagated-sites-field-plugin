@@ -61,22 +61,23 @@ class Sites extends Plugin
             if ($field != null && $field->propagate) {
                 try {
                     $siteIds = $entry->getFieldValue($field->handle);
-                } cacth (\Exception $e) {
+                    foreach (Craft::$app->sites->allSiteIds as $siteId) {
+	                    if(array_search($siteId, $siteIds) === false) {
+	                        try {
+	                            //hier den eintrag aus `content` (`elementId`, `siteId`) löschen und aus elements sites
+	                            Craft::$app->db->createCommand()->delete('content', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
+	                            Craft::$app->db->createCommand()->delete('elements_sites', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
+	                        } catch (ElementNotFoundException $e) {
+	                            Craft::error('Error while propagting entry to sites.');
+	                            throw new Exception('Error while propagting entry to sites.');
+	                        }
+	                    }
+	                }
+                } catch (\Exception $e) {
                     //nothing
                     
                 }
-                foreach (Craft::$app->sites->allSiteIds as $siteId) {
-                    if(array_search($siteId, $siteIds) === false) {
-                        try {
-                            //hier den eintrag aus `content` (`elementId`, `siteId`) löschen und aus elements sites
-                            Craft::$app->db->createCommand()->delete('content', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
-                            Craft::$app->db->createCommand()->delete('elements_sites', 'elementId = :elementId AND siteId = :siteId', [':elementId' => $entry->id, ':siteId' => $siteId])->execute();
-                        } catch (ElementNotFoundException $e) {
-                            Craft::error('Error while propagting entry to sites.');
-                            throw new Exception('Error while propagting entry to sites.');
-                        }
-                    }
-                }
+                
             }
         }
     }
