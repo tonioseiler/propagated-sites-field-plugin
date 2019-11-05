@@ -59,7 +59,7 @@ class Sites extends Plugin
             $field = $this->getSiteField($entry);
 
             if ($field != null && $field->propagate) {
-                try {
+                if (!empty($entry[$field->handle])) {
                     $siteIds = $entry->getFieldValue($field->handle);
                     foreach (Craft::$app->sites->allSiteIds as $siteId) {
 	                    if(array_search($siteId, $siteIds) === false) {
@@ -73,11 +73,7 @@ class Sites extends Plugin
 	                        }
 	                    }
 	                }
-                } catch (\Exception $e) {
-                    //nothing
-                    
                 }
-                
             }
         }
     }
