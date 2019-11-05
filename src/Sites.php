@@ -79,11 +79,10 @@ class Sites extends Plugin
     protected function getSiteField(Entry $entry) {
         //find sites field
         $fieldValues = $entry->getFieldValues();
-        $siteFields = Craft::$app->fields->allFields;
-        $siteFieldHandle = 'sites';
+        $fields = Craft::$app->fields->allFields;
 
         foreach ($fieldValues as $handle => $value) {
-            foreach ($siteFields as $field) {
+            foreach ($fields as $field) {
                 if(get_class($field) == 'furbo\sitesfield\fields\SitesField') {
                     return $field;
                 }

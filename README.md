@@ -44,3 +44,22 @@ composer require furbo/propagated-sites-field
 - Plugin über Backend aktivieren
 - Create field from Type Sites (in the current release fieldhandle must be "sites")
 - Add Field to entries and save
+
+### Show field in frontend
+```
+<label>Event Regions</label>
+{% set currentsite = craft.app.fields.getFieldByHandle('sites') %}
+{% set sites = craft.app.sites.getAllSites() %}
+<input type="hidden" id="fields-sites" name="fields[sites][]" value="{{ currentSite.id }}">
+	<br />
+	{% for site in sites %}
+
+        {% set checked = true ? 'checked=""' : '' %}
+        <div>
+            <input type="checkbox" value="{{site.id}}" class="checkbox" id="fields-sites-{{site.id}}" name="fields[sites][]" {{checked}}>
+            <label for="fields-sites-{{site.id}}">{{site.name}}</label>
+        </div>
+
+    {% endfor %}
+</div>
+```

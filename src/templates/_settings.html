@@ -1,8 +1,8 @@
 {% import '_includes/forms' as forms %}
 
 {{ forms.checkboxGroupField({
-	label : 'Allowed Sites' | t('sites-field'),
-	instructions : 'The sites that may be chosen for this field.' | t('sites-field'),
+	label : 'Allowed Sites' | t('propagated-sites-field'),
+	instructions : 'The sites that may be chosen for this field.' | t('propagated-sites-field'),
 	id : 'whitelistedSites',
 	name : 'whitelistedSites',
 	values: field.whitelistedSites,
@@ -10,8 +10,8 @@
 }) }}
 
 {{ forms.checkboxField({
-	label : 'Propagate to selected sites' | t('sites-field'),
-	instructions : 'If the section is configured to propagate entries to all sites, the entries are only propagated to the selected sites. If the section is configured not to propagate, then this field does not have an effect.' | t('sites-field'),
+	label : 'Propagate to selected sites' | t('propagated-sites-field'),
+	instructions : 'If the section is configured to propagate entries to all sites, the entries are only propagated to the selected sites. If the section is configured not to propagate, then this field does not have an effect.' | t('propagated-sites-field'),
 	id : 'propagate',
 	name : 'propagate',
 	checked: field.propagate
