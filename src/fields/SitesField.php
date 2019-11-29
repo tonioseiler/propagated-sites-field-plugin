@@ -29,6 +29,11 @@ class SitesField extends Field implements PreviewableFieldInterface
 	 */
 	public $whitelistedSites = [];
 
+    /*
+     * used for backward comptibility
+     */
+    public $allowMultiple = false;
+
 	/**
 	 * @inheritdoc
 	 * @see craft\base\ComponentInterface
