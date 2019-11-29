@@ -1,6 +1,6 @@
 <?php
 /**
- * Sites Field plugin for Craft 3.0
+ * Propageted Sites Field plugin for Craft 3.0
  * @copyright Furbo GmbH
  */
 

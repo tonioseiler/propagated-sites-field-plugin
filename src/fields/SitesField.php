@@ -29,19 +29,13 @@ class SitesField extends Field implements PreviewableFieldInterface
 	 */
 	public $whitelistedSites = [];
 
-    /**
-     * @var bool Whether or not the field allows multiple selections.
-     * -> not used anymore but breaks backwards compatibility if removed
-     */
-    public $allowMultiple = true;
-
 	/**
 	 * @inheritdoc
 	 * @see craft\base\ComponentInterface
 	 */
 	public static function displayName(): string
 	{
-	return \Craft::t('propagated-sites-field', 'Propagated Sites');
+	       return \Craft::t('propagated-sites-field', 'Propagated Sites');
 	}
 
 	/**

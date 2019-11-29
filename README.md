@@ -1,6 +1,6 @@
 # Sites Field for Craft 3
 
-This plugin provides a field type for choosing sites. Entries using this field can then access the site ID in their templates.
+This plugin provides a field type for choosing craft sites. Entries using this field can then access the site ID in templates, for example for filtering.
 The entries are  propagated to the selected sites only.
 ---
 
@@ -25,6 +25,11 @@ To display only events related to the current site you could use the following l
 
 
 ## Installation
+
+- Over Craft Plugin Store
+
+OR
+
 - Clone repo from here:
 https://bitbucket.org/seilersteinbachgmbh/propagated-sites-field-plugin/src/master/
 - add repo to composer json of your craft installation like this:
@@ -37,6 +42,7 @@ https://bitbucket.org/seilersteinbachgmbh/propagated-sites-field-plugin/src/mast
     }
 ]
 ```
+
 - Install plugin via composer
 ```
 composer require furbo/propagated-sites-field
@@ -46,6 +52,9 @@ composer require furbo/propagated-sites-field
 - Add Field to entries and save
 
 ### Show field in frontend
+
+If the entry is saved in frontend, the same propagtion logix apears
+
 ```
 <label>Event Regions</label>
 {% set currentsite = craft.app.fields.getFieldByHandle('sites') %}

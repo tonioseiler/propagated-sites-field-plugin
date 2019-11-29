@@ -11,7 +11,7 @@
 
 {{ forms.checkboxField({
 	label : 'Propagate to selected sites' | t('propagated-sites-field'),
-	instructions : 'If the section is configured to propagate entries to all sites, the entries are only propagated to the selected sites. If the section is configured not to propagate, then this field does not have an effect.' | t('propagated-sites-field'),
+	instructions : 'instructions : 'If checked, entries are being propagated to the selected sites. Section must have propagtion enabled.' | t('propagated-sites-field'),
 	id : 'propagate',
 	name : 'propagate',
 	checked: field.propagate
